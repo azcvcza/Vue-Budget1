@@ -4,10 +4,14 @@ import Vue from 'vue';
 import { App } from './app';
 import router from './router';
 import store from './store';
+import localforage from 'localforage';
+require('localforage-startswith');
 
-
-// Import App Custom Styles
-//import AppStyles from './css/app.css';
+localforage.config({
+        name: 'budgeterbium'
+    })
+    // Import App Custom Styles
+    //import AppStyles from './css/app.css';
 
 
 

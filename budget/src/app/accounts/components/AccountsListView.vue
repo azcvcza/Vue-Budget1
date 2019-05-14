@@ -45,10 +45,13 @@
 			return {
 				categories: CATEGORIES
 			};
-		},
+    },
+    mounted() {
+      this.loadAccounts();
+    },
 		methods: {
 			// this imports our vuex actions and maps them to methods on this component
-			...mapActions(["deleteAccount"]),
+			...mapActions(["deleteAccount","loadAccounts"]),
 
 			confirmDeleteAccount(account) {
 				// note that these are backticks and not quotation marks

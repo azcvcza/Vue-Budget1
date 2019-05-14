@@ -54,24 +54,28 @@ export default {
  };
  },
 
- mounted () {
-	 console.log(this.selectedAccount)
+  mounted () {
  if ('accountId' in this.$route.params) {
-	 console.log("get here",this.$route.params)
+ this.loadAccounts().then(() => {
  let selectedAccount = this.getAccountById(this.$route.params.accountId);
- console.log("get there",selectedAccount)
  if (selectedAccount) {
  this.editing = true;
- this.selectedAccount = selectedAccount;
+ this.selectedAccount = {
+ name: selectedAccount.name,
+ category: selectedAccount.category,
+ id: selectedAccount.id
+ };
  }
  // TODO: the object does not exist, how do we handle this scenario?
+ });
  }
  },
 
  methods: {
  ...mapActions([
  'addAccount',
- 'updateAccount'
+ 'updateAccount',
+ 'loadAccounts'
  ]),
 
  resetAndGo () {
