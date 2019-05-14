@@ -61,6 +61,8 @@ export default {
  saveNewAccount () {
  this.addAccount(this.newAccount).then(() => {
  this.newAccount = {};
+ }).then(()=>{
+	 this.$router.push('/')
  });
  }
  }
