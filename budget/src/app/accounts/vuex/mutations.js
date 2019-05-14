@@ -1,5 +1,7 @@
+import { guid } from '../../../utils';
 export default {
-    DO_SOMETHING(state, { data }) {
-        state.something = data;
+    ADD_ACCOUNT(state, payload) {
+        let id = guid();
+        state.accounts[id] = Object.assign({ id: id }, payload.accounts)
     }
 };
