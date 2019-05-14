@@ -2,33 +2,39 @@
  <div id="accounts-create-edit-view">
  You can create and edit accounts with me, yippee!
 
- <router-link :to="{ name: 'accountsListView' }">View all accounts</router-link>
-
- <form class="form" @submit.prevent="saveNewAccount">
- <label for="name" class="label">Name</label>
- <p class="control">
+ <router-link :to="{ name: 'accountsListView' }"><span class="tag is-link">View all accounts</span></router-link>
+	
+ <form class="form " @submit.prevent="saveNewAccount">
+ 
+ <div class="control">
+	 <label for="name" class="label">Name</label>
  <input type="text" class="input" name="name" v-model="newAccount.name">
- </p>
- <label for="category" class="label">Category</label>
- <p class="control">
+ </div>
+ 
+ <div class="control has-addons">
+	 <label for="category" class="label">Category</label>
  <span class="select">
  <select name="category" v-model="newAccount.category">
  <option v-for="value, key in categories" :value="key">{{ value }}</option>
  </select>
  </span>
- </p>
- <label for="balance" class="label">Balance</label>
- <p class="control">
- <input type="text" class="input" name="balance" v-model="newAccount.balance">
- </p>
- <div class="control is-grouped">
- <p class="control">
- <button class="button is-primary">Submit</button>
- </p>
- <p class="control">
- <router-link :to="{ name: 'accountsListView' }"><button class="button is-link">Cancel</button></router-link>
- </p>
  </div>
+ 
+ <div class="control">
+	 <label for="balance" class="label">Balance</label>
+ <input type="text" class="input" name="balance" v-model="newAccount.balance">
+ </div>
+ <div class="field is-grouped">
+  <div class="control">
+ <button class="button is-link">Submit</button>
+ </div>
+ <div class="control">
+ <router-link :to="{ name: 'accountsListView' }"><button class="button is-danger">Cancel</button></router-link>
+ </div>
+</div>
+ 
+ 
+
  </form>
  </div>
 </template>
