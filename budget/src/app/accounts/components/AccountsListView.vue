@@ -1,6 +1,6 @@
 <template>
 	<div id="accounts-list-view" class="container">
-		I'm a list of accounts!
+		
 		<router-link :to="{ name: 'createEditAccount' }">
 			<span class="tag is-link">Add an account</span>
 		</router-link>

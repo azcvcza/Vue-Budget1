@@ -1,6 +1,6 @@
 <template>
 	<div id="accounts-create-edit-view">
-		You can create and edit accounts with me, yippee!
+		
 		<router-link :to="{ name: 'accountsListView' }">
 			<span class="tag is-link">View all accounts</span>
 		</router-link>
