@@ -1,11 +1,10 @@
-import { removeAccount, saveAccount, fetchAccounts } from '../api';
 import { guid } from '../../../utils';
-const ACCOUNT_NAMESPACE = 'ACCOUNT-';
+import { deleteAccount as deleteAccountFromAPI, saveAccount, fetchAccounts } from '../api';
 
-export const addAccount = ({ commit }, data) => {
+export const createAccount = ({ commit }, data) => {
     let id = guid();
     let account = Object.assign({ id: id }, data);
-    commit('ADD_ACCOUNT', { account: account });
+    commit('CREATE_ACCOUNT', { account: account });
     saveAccount(account).then((value) => {
         // we've saved the account, what now
     });
@@ -18,7 +17,7 @@ export const updateAccount = ({ commit }, data) => {
 
 export const deleteAccount = ({ commit }, data) => {
     commit('DELETE_ACCOUNT', { account: data });
-    removeAccount(data);
+    deleteAccountFromAPI(data);
 };
 
 export const loadAccounts = (state) => {
@@ -30,4 +29,4 @@ export const loadAccounts = (state) => {
             state.commit('LOAD_ACCOUNTS', accounts);
         });
     }
-}
+};
