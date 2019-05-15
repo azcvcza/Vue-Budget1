@@ -7,6 +7,7 @@
 		<div>
 			<table class="table is-bordered is-striped is-hoverable is-fullwidth">
 				<tr>
+          <th>ID</th>
 					<th>姓名</th>
 					<th>种类</th>
 					<th>花费</th>
@@ -14,7 +15,9 @@
 				</tr>
 				<tbody>
 					<tr v-for="account,key in accounts">
-						<td>{{account.name}}</td>
+            <td>{{account.name}}</td>
+            <td>{{account.id}}</td>
+						
 						<td>
 							<span class="tag is-small is-info">{{ categories[account.category] }}</span>
 						</td>
