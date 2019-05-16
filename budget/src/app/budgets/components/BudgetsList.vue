@@ -1,9 +1,9 @@
 <template>
   <div id="budgets-list">
-    I'm a list of budgets!
-    <router-link to="{name='createBudget'}">Add a budget</router-link>
-    <router-link to="{name='accountListView'}">View accounts</router-link>
-    <table>
+    <h2>I'm a list of budgets!</h2>
+    <router-link :to="{name:'createBudget'}"><button class="button is-light"> Add a budget</button></router-link>
+    <router-link :to="{name:'accountsListView'}"><button class="button is-link">View accounts</button></router-link>
+    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
       <tr>
         <th>月份</th>
         <th>信息</th>
