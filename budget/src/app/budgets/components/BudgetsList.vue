@@ -1,12 +1,12 @@
 <template>
-  <div id="budgets-list-view">
+  <div id="budgets-list">
     I'm a list of budgets!
   </div>
 </template>
 
 <script>
 export default {
-  name: 'budgets-list-view'
+  name: 'budgets-list'
 };
 </script>
 
