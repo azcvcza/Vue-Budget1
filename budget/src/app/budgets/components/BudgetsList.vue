@@ -13,7 +13,7 @@
       </tr>
       <tbody>
         <tr v-for="budget,key in budgets">
-          <td>{{budget.month}}</td>
+          <td>{{budget.month | moment('MMM YYYY')}}</td>
           <td>{{budget.budgeted}}</td>
           <td>{{budget.spent}}</td>
           <td>{{budget.income}}</td>
@@ -27,9 +27,12 @@
 
 <script>
 import {mapState,mapActions} from 'vuex';
+import {moment} from '../../../filter'
 export default {
   name: 'budgets-list',
-  
+  filters:{
+    moment
+  },
   mounted() {
      this.loadBudgets();
   },
