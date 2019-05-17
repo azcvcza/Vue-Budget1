@@ -55,15 +55,20 @@
 			resetAndGo() {
 				this.selectedBudget = {};
 				// todo: redirect here
+				this.$router.push({name:'budgetsList'});
 			},
 			saveNewBudget() {
 				this.createBudget(this.selectedBudget).then(() => {
 					this.resetAndGo();
+				}).catch((err)=>{
+					console.log("err in saveNewBudget:",err);
 				});
 			},
 			saveBudget() {
 				this.updateBudget(this.selectedBudget).then(() => {
 					this.resetAndGo();
+				}).catch((err)=>{
+					console.log("err in saveBudget:",err);
 				});
 			},
 			processSave() {
