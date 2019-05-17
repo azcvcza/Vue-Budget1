@@ -2,8 +2,12 @@ import localforage from 'localforage';
 import { processAPIData } from '../../utils';
 
 const BUDGET_NAMESPACE = 'BUDGET-';
+const CATEGORY_NAMESPACE = 'CATEGORY-';
 
 export const saveBudget = (budget) => {
+    budget = Object.assign({}, budget); // clone our object so we can manipulate it before saving
+    budget.month = budget.month.toJSON();
+
     return localforage.setItem(
         BUDGET_NAMESPACE + budget.id,
         budget
@@ -24,6 +28,7 @@ export const fetchBudgets = () => {
         return budgets;
     });
 };
+
 export const saveCategory = (category) => {
     return localforage.setItem(
         CATEGORY_NAMESPACE + category.id,

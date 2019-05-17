@@ -13,7 +13,7 @@
       </tr>
       <tbody>
         <tr v-for="budget,key in sortedBudgets">
-          <td>{{budget.month | moment('MMM YYYY')}}</td>
+          <td>{{budget.month | moment('MMMM YYYY')}}</td>
           <td>{{budget.budgeted}}</td>
           <td>{{budget.spent}}</td>
           <td>{{budget.income}}</td>
