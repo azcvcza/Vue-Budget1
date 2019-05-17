@@ -16,6 +16,11 @@ export const saveBudget = (budget) => {
 
 export const fetchBudgets = () => {
     return localforage.startsWith(BUDGET_NAMESPACE).then((res) => {
-        return processAPIData(res);
+        let budgets = processAPIData(res);
+        Object.keys(budgets).forEach((o) => {
+            budgets[o].month = new Date(budgets[o].month);
+        });
+
+        return budgets;
     });
 };
