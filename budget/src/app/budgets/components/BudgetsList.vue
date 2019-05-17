@@ -12,7 +12,7 @@
         <th>编辑</th>
       </tr>
       <tbody>
-        <tr v-for="budget,key in budgets">
+        <tr v-for="budget,key in sortedBudgets">
           <td>{{budget.month | moment('MMM YYYY')}}</td>
           <td>{{budget.budgeted}}</td>
           <td>{{budget.spent}}</td>
@@ -26,29 +26,36 @@
 </template>
 
 <script>
-import {mapState,mapActions} from 'vuex';
-import {moment} from '../../../filter'
+import { mapState, mapActions } from 'vuex';
+import { moment } from '../../../filter';
 export default {
   name: 'budgets-list',
-  filters:{
+  filters: {
     moment
   },
-  mounted() {
-     this.loadBudgets();
+  mounted () {
+    this.loadBudgets();
   },
-  methods:{
+  methods: {
     ...mapActions([
       'loadBudgets'
     ])
   },
   computed: {
     ...mapState({
-      'budgets':state=>state.budgets.budgets
-    })
-  },
+      'budgets': state => state.budgets.budgets
+    }),
+    sortedBudgets () {
+      let sortedKeys = Object.keys(this.budgets).sort((a, b) => {
+        return this.budgets[b].month - this.budgets[a].month;
+      });
+      return sortedKeys.map((key) => {
+        return this.budgets[key];
+      });
+    }
+  }
 };
 </script>
-
 <style scoped lang='scss'>
 #budgets-list-view {
 	background-color: #0000ff;
