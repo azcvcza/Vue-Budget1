@@ -24,3 +24,19 @@ export const fetchBudgets = () => {
         return budgets;
     });
 };
+export const saveCategory = (category) => {
+    return localforage.setItem(
+        CATEGORY_NAMESPACE + category.id,
+        category
+    ).then((value) => {
+        return value;
+    }).catch((err) => {
+        console.log('category problems abound! ', err);
+    });
+};
+
+export const fetchCategories = () => {
+    return localforage.startsWith(CATEGORY_NAMESPACE).then((res) => {
+        return processAPIData(res);
+    });
+};
