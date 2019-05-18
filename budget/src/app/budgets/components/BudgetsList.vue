@@ -6,7 +6,7 @@
     <table class="table is-bordered is-striped is-hoverable is-fullwidth">
       <tr>
         <th>月份</th>
-        <th>信息</th>
+        <th>budget</th>
         <th>花费</th>
         <th>收入</th>
         <th>编辑</th>
