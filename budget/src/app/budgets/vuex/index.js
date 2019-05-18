@@ -4,7 +4,9 @@ import getters from './getters';
 
 const state = {
     budgets: {},
-    categories: {}
+    categories: {
+
+    }
 };
 
 export default {

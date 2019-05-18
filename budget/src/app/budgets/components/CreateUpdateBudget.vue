@@ -10,90 +10,100 @@
 				</div>
 			</div>
 		</nav>
+		<div class="tile is-ancestor">
+				<div class="tile is-child notification is-primary">
+				<div v-if="editing">
+					<p class="title">now is editing budget</p>
+					<nav class="level">
+						<div class="level-item has-text-centered">
+							<div>
+								<p class="heading">Budgeted</p>
+								<p class="title">${{ selectedBudget.budgeted }}</p>
+							</div>
+						</div>
+						<div class="level-item has-text-centered">
+							<div>
+								<p class="heading">Spent</p>
+								<p class="title">${{ selectedBudget.spent }}</p>
+							</div>
+						</div>
+						<div class="level-item has-text-centered">
+							<div>
+								<p class="heading">Income</p>
+								<p class="title">${{ selectedBudget.income }}</p>
+							</div>
+						</div>
+					</nav>
 
-		<form class="form" @submit.prevent="processSave">
-			<label for="month" class="label">Month</label>
-			<p class="control">
-				<datepicker name="month" input-class="input" format="MMMM yyyy" v-model="selectedBudget.month"></datepicker>
-				<span class="icon">
-					<i class="fa fa-calendar" aria-hidden></i>
-				</span>
-			</p>
-			<p class="control">Budgeted: ${{ selectedBudget.budgeted }}</p>
-			<p class="control">Spent: ${{ selectedBudget.spent }}</p>
-			<p class="control">Income: ${{ selectedBudget.income }}</p>
-				<p class="help" v-if="!editing">To add budget items you must first save the budget.</p>
-			<div class="field is-grouped">
-				
-				<div class="control">
-					<button class="button is-link">Submit</button>
+					<table class="table is-bordered is-striped is-hoverable is-fullwidth">
+						<thead>
+							<tr>
+								<th>Category</th>
+								<th>Budgeted</th>
+								<th>Spent</th>
+								<th>Remaining</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="bc in selectedBudget.budgetCategories">
+								<td>
+									<span class="subtitle is-5">{{ getCategoryById(bc.category).name }}</span>
+								</td>
+								<td>
+									<span class="subtitle is-5">${{ bc.budgeted }}</span>
+								</td>
+								<td>
+									<span class="subtitle is-5">${{ bc.spent }}</span>
+								</td>
+								<td>
+									<span class="subtitle is-5">${{ bc.budgeted - bc.spent }}</span>
+								</td>
+							</tr>
+							<CreateUpdateBudgetCategory v-on:add-budget-category="addBudgetCategory"></CreateUpdateBudgetCategory>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td></td>
+								<td>${{ selectedBudget.budgeted }}</td>
+								<td>${{ selectedBudget.spent }}</td>
+								<td>${{ selectedBudget.budgeted - selectedBudget.spent }}</td>
+							</tr>
+						</tfoot>
+					</table>
 				</div>
-				<div class="control">
-				
-					<router-link :to="{ name: 'budgetsList' }">
-						<button class="button is-warning">Cancel</button>
-					</router-link>
-				</div>
+				<div v-else=""><p class="title">now is creating budget</p></div>
 			</div>
-		</form>
-
-		<div v-if="editing">
-			<nav class="level">
-				<div class="level-item has-text-centered">
-					<div>
-						<p class="heading">Budgeted</p>
-						<p class="title">${{ selectedBudget.budgeted }}</p>
+			<div class="tile is-child notification is-info">
+				<form class="form" @submit.prevent="processSave">
+					<label for="month" class="label">Month</label>
+					<p class="control">
+						<datepicker
+							name="month"
+							input-class="input"
+							format="MMMM yyyy"
+							v-model="selectedBudget.month"
+						></datepicker>
+						<span class="icon">
+							<i class="fa fa-calendar" aria-hidden></i>
+						</span>
+					</p>
+					<p class="control">Budgeted: ${{ selectedBudget.budgeted }}</p>
+					<p class="control">Spent: ${{ selectedBudget.spent }}</p>
+					<p class="control">Income: ${{ selectedBudget.income }}</p>
+					<p class="help" v-if="!editing">To add budget items you must first save the budget.</p>
+					<div class="field is-grouped">
+						<div class="control">
+							<button class="button is-link">Submit</button>
+						</div>
+						<div class="control">
+							<router-link :to="{ name: 'budgetsList' }">
+								<button class="button is-warning">Cancel</button>
+							</router-link>
+						</div>
 					</div>
-				</div>
-				<div class="level-item has-text-centered">
-					<div>
-						<p class="heading">Spent</p>
-						<p class="title">${{ selectedBudget.spent }}</p>
-					</div>
-				</div>
-				<div class="level-item has-text-centered">
-					<div>
-						<p class="heading">Income</p>
-						<p class="title">${{ selectedBudget.income }}</p>
-					</div>
-				</div>
-			</nav>
-
-			<table class="table is-bordered is-striped is-hoverable is-fullwidth">
-				<thead>
-					<tr>
-						<th>Category</th>
-						<th>Budgeted</th>
-						<th>Spent</th>
-						<th>Remaining</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="bc in selectedBudget.budgetCategories">
-						<td>
-							<span class="subtitle is-5">{{ getCategoryById(bc.category).name }}</span>
-						</td>
-						<td>
-							<span class="subtitle is-5">${{ bc.budgeted }}</span>
-						</td>
-						<td>
-							<span class="subtitle is-5">${{ bc.spent }}</span>
-						</td>
-						<td>
-							<span class="subtitle is-5">${{ bc.budgeted - bc.spent }}</span>
-						</td>
-					</tr>
-					<CreateUpdateBudgetCategory v-on:add-budget-category="addBudgetCategory"></CreateUpdateBudgetCategory>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td></td>
-						<td>${{ selectedBudget.budgeted }}</td>
-						<td>${{ selectedBudget.spent }}</td>
-						<td>${{ selectedBudget.budgeted - selectedBudget.spent }}</td>
-					</tr>
-				</tfoot>
-			</table>
+				</form>
+			</div>
+		
 		</div>
 	</div>
 </template>
