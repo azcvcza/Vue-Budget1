@@ -1,9 +1,18 @@
 <template>
 	<div id="accounts-create-edit-view">
-		
-		<router-link :to="{ name: 'accountsListView' }">
+		 <nav class="level">
+      <div class="level-left">
+        <h4 class="title is-2">Add Account</h4>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <router-link :to="{ name: 'accountsList' }">
 			<span class="tag is-link">View all accounts</span>
 		</router-link>
+        </div>
+      </div>
+    </nav>
+		
 
 		<form class="form" @submit.prevent="processSave">
 			<div class="control">
@@ -30,7 +39,7 @@
 					<button class="button is-link" v-else>Update</button>
 				</div>
 				<div class="control">
-					<router-link :to="{ name: 'accountsListView' }">
+					<router-link :to="{ name: 'accountsList' }">
 						<button class="button is-danger">Cancel</button>
 					</router-link>
 				</div>
@@ -73,18 +82,18 @@ export default {
 
  methods: {
  ...mapActions([
- 'addAccount',
+ 'createAccount',
  'updateAccount',
  'loadAccounts'
  ]),
 
  resetAndGo () {
  this.selectedAccount = {};
- this.$router.push({ name: 'accountsListView' });
+ this.$router.push({ name: 'accountsList' });
  },
 
  saveNewAccount () {
- this.addAccount(this.selectedAccount).then(() => {
+ this.createAccount(this.selectedAccount).then(() => {
  this.resetAndGo();
  });
  },
