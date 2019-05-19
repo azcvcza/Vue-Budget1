@@ -1,15 +1,32 @@
 <template>
-  <div id="app">
-    <img src="../assets/logo.png">
-    <router-view/>
+  <div id="app" class="tile is-ancestor" >
+    <div class="tile is-parent">
+      
+      <div class="tile is-child">
+        <div class="tile is-child notification is-light">
+          <p class="title">budgeterbium</p>
+        <span ><img src="../assets/logo.png"></span>
+        
+        </div>
+        <navigation class="tile is-child notification is-text"></navigation>
+      </div>
+      <div class="tile is-child notification is-warning">
+        <router-view></router-view>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { Navigation } from './navigation/components';
 export default {
-  name: 'App'
-}
+  name: 'app',
+  components: {
+    Navigation
+  }
+};
 </script>
+
 
 <style>
 #app {
