@@ -1,5 +1,5 @@
 <template>
-	<div id="accounts-list-view" >
+	<div id="accounts-list-view">
 		<nav class="level">
 			<div class="level-left">
 				<h4 class="title is-2">Accounts</h4>
@@ -7,7 +7,7 @@
 			<div class="level-right">
 				<div class="level-item">
 					<router-link :to="{ name: 'createEditAccount' }">
-						<span class="tag is-link">Add an account</span>
+						<span class="tag is-primary">Add an account+</span>
 					</router-link>
 				</div>
 			</div>
@@ -16,15 +16,14 @@
 		<div>
 			<table class="table is-bordered is-striped is-hoverable is-fullwidth">
 				<tr>
-					<th>ID</th>
 					<th>姓名</th>
 					<th>种类</th>
 					<th>花费</th>
-					<th>编辑</th>
+					<th>修改</th>
+					<th>删除</th>
 				</tr>
 				<tbody>
 					<tr v-for="account,key in accounts">
-						<td>{{account.id}}</td>
 						<td>{{account.name}}</td>
 						<td>
 							<span class="tag is-small is-info">{{ categories[account.category] }}</span>
@@ -34,6 +33,8 @@
 							<router-link :to="{ name: 'editAccount', params: { accountId: account.id } }">
 								<span class="tag is-link">修改</span>
 							</router-link>
+						</td>
+						<td>
 							<a @click="confirmDeleteAccount(account)">
 								<span class="tag is-danger">删除</span>
 							</a>
