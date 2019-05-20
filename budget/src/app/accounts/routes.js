@@ -11,6 +11,7 @@ export default [{
     }, {
         path: '/accounts/:accountId/edit', // the URL accepts an accountId parameter
         component: components.CreateEditAccount,
-        name: 'editAccount'
+        name: 'editAccount',
+        props: true
     }
 ];

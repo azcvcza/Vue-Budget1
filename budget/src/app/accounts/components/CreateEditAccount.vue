@@ -59,7 +59,7 @@
 
 	export default {
 		name: "accounts-create-edit-view",
-
+		props: ["accountId"],
 		data: () => {
 			return {
 				categories: CATEGORIES,
@@ -69,19 +69,8 @@
 		},
 
 		mounted() {
-			if ("accountId" in this.$route.params) {
-				this.loadAccounts().then(() => {
-					let selectedAccount = this.getAccountById(this.$route.params.accountId);
-					if (selectedAccount) {
-						this.editing = true;
-						this.selectedAccount = {
-							name: selectedAccount.name,
-							category: selectedAccount.category,
-							id: selectedAccount.id
-						};
-					}
-					// TODO: the object does not exist, how do we handle this scenario?
-				});
+			if (this.accountId) {
+				this.loadAccount();
 			}
 		},
 
@@ -107,11 +96,31 @@
 
 			processSave() {
 				this.editing ? this.saveAccount() : this.saveNewAccount();
+			},
+			loadAccount() {
+				let vm = this;
+				this.loadAccount().then(() => {
+					let selectedAccount = vm.getAccountById(vm.accountId);
+					if (selectedAccount) {
+						vm.editing = true;
+						vm.selectedAccount = Object.assign({}, selectedAccount);
+					}
+					// TODO: the object does not exist, how do we handle this scenario?
+				});
 			}
 		},
 
 		computed: {
 			...mapGetters(["getAccountById"])
+		},
+		watch: {
+			accountId(newId) {
+				if (newId) {
+					this.loadAccount();
+				}
+				this.editing = false;
+				this.selectedAccount = {};
+			}
 		}
 	};
 </script>

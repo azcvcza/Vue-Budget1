@@ -6,7 +6,7 @@
 				<ul>
 					<li v-for="account in accounts">
 						<router-link :to="{ name: 'editAccount', params: { accountId: account.id } }">
-							name:{{ account.name }}-<span>${{ account.balance }}</span>
+						|	name:{{ account.name }}-<span>${{ account.balance }}</span>  |
 						</router-link>
 					</li>
 				</ul>
