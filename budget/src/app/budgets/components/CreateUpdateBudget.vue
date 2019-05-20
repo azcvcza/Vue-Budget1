@@ -11,7 +11,7 @@
 			</div>
 		</nav>
 		<div class="tile is-ancestor">
-				<div class="tile is-child notification is-primary">
+			<div class="tile is-child notification is-primary">
 				<div v-if="editing">
 					<p class="title">now is editing budget</p>
 					<nav class="level">
@@ -35,35 +35,40 @@
 						</div>
 					</nav>
 
-				<table class="table is-bordered">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Budgeted</th>
-            <th>Spent</th>
-            <th>Remaining</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="bc in selectedBudget.budgetCategories">
-            <td><span class="subtitle is-5">{{ getCategoryById(bc.category).name }}</span></td>
-            <td><span class="subtitle is-5">${{ bc.budgeted }}</span></td>
-            <td><span class="subtitle is-5">${{ bc.spent }}</span></td>
-            <td><span class="subtitle is-5">${{ bc.budgeted - bc.spent }}</span></td>
-          </tr>
-          <CreateUpdateBudgetCategory v-on:add-budget-category="addBudgetCategory"></CreateUpdateBudgetCategory>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td>${{ selectedBudget.budgeted }}</td>
-            <td>${{ selectedBudget.spent }}</td>
-            <td>${{ selectedBudget.budgeted - selectedBudget.spent }}</td>
-          </tr>
-        </tfoot>
-      </table>
+					<table class="table is-bordered">
+						<thead>
+							<tr>
+								<th>Category</th>
+								<th>Budgeted</th>
+								<th>Spent</th>
+								<th>Remaining</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template>
+								<!--v-for="value, key in selectedBudget.budgetCategories" this doesn't work-->
+            <component
+              :is="budgetCategoryComponent(value)"
+              v-model="value"
+              v-on:update-budget-category="saveBudgetCategory"
+              v-on:edit-budget-category="activeBudgetCategory = value"
+            ></component>
+          </template>
+							<CreateUpdateBudgetCategory v-on:add-budget-category="addBudgetCategory"></CreateUpdateBudgetCategory>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td></td>
+								<td>${{ selectedBudget.budgeted }}</td>
+								<td>${{ selectedBudget.spent }}</td>
+								<td>${{ selectedBudget.budgeted - selectedBudget.spent }}</td>
+							</tr>
+						</tfoot>
+					</table>
 				</div>
-				<div v-else=""><p class="title">now is creating budget</p></div>
+				<div v-else>
+					<p class="title">now is creating budget</p>
+				</div>
 			</div>
 			<div class="tile is-child notification is-info">
 				<form class="form" @submit.prevent="processSave">
@@ -95,12 +100,12 @@
 					</div>
 				</form>
 			</div>
-		
 		</div>
 	</div>
 </template>
 
 <script>
+	import BudgetCategory from "./BudgetCategory";
 	import { mapActions, mapGetters } from "vuex";
 	import Datepicker from "vuejs-datepicker";
 	import CreateUpdateBudgetCategory from "./CreateUpdateBudgetCategory";
@@ -108,12 +113,14 @@
 		name: "budget-create-edit-view",
 		components: {
 			Datepicker,
-			CreateUpdateBudgetCategory
+			CreateUpdateBudgetCategory,
+			BudgetCategory
 		},
 		data: () => {
 			return {
 				selectedBudget: {},
-				editing: false
+				editing: false,
+				activeBudgetCategory: null
 			};
 		},
 		mounted() {
@@ -132,7 +139,8 @@
 				"createBudget",
 				"updateBudget",
 				"loadBudgets",
-				"createBudgetCategory"
+				"createBudgetCategory",
+				"updateBudgetCategory"
 			]),
 			resetAndGo() {
 				this.selectedBudget = {};
@@ -174,6 +182,25 @@
 						this.getBudgetById(this.$route.params.budgetId)
 					);
 				});
+			},
+			saveBudgetCategory(budgetCategory) {
+				// format it how our action expects
+				budgetCategory.category = budgetCategory.category.id;
+				this.updateBudgetCategory({
+					budget: this.selectedBudget,
+					budgetCategory: budgetCategory
+				}).then(() => {
+					this.selectedBudget = Object.assign(
+						{},
+						this.getBudgetById(this.$route.params.budgetId)
+					);
+				});
+			},
+			budgetCategoryComponent(budgetCategory) {
+				return this.activeBudgetCategory &&
+					this.activeBudgetCategory === budgetCategory
+					? "create-update-budget-category"
+					: "budget-category";
 			}
 		},
 		computed: {
