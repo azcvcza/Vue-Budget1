@@ -35,41 +35,33 @@
 						</div>
 					</nav>
 
-					<table class="table is-bordered is-striped is-hoverable is-fullwidth">
-						<thead>
-							<tr>
-								<th>Category</th>
-								<th>Budgeted</th>
-								<th>Spent</th>
-								<th>Remaining</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="bc in selectedBudget.budgetCategories">
-								<td>
-									<span class="subtitle is-5">{{ getCategoryById(bc.category).name }}</span>
-								</td>
-								<td>
-									<span class="subtitle is-5">${{ bc.budgeted }}</span>
-								</td>
-								<td>
-									<span class="subtitle is-5">${{ bc.spent }}</span>
-								</td>
-								<td>
-									<span class="subtitle is-5">${{ bc.budgeted - bc.spent }}</span>
-								</td>
-							</tr>
-							<CreateUpdateBudgetCategory v-on:add-budget-category="addBudgetCategory"></CreateUpdateBudgetCategory>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td></td>
-								<td>${{ selectedBudget.budgeted }}</td>
-								<td>${{ selectedBudget.spent }}</td>
-								<td>${{ selectedBudget.budgeted - selectedBudget.spent }}</td>
-							</tr>
-						</tfoot>
-					</table>
+				<table class="table is-bordered">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Budgeted</th>
+            <th>Spent</th>
+            <th>Remaining</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="bc in selectedBudget.budgetCategories">
+            <td><span class="subtitle is-5">{{ getCategoryById(bc.category).name }}</span></td>
+            <td><span class="subtitle is-5">${{ bc.budgeted }}</span></td>
+            <td><span class="subtitle is-5">${{ bc.spent }}</span></td>
+            <td><span class="subtitle is-5">${{ bc.budgeted - bc.spent }}</span></td>
+          </tr>
+          <CreateUpdateBudgetCategory v-on:add-budget-category="addBudgetCategory"></CreateUpdateBudgetCategory>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td>${{ selectedBudget.budgeted }}</td>
+            <td>${{ selectedBudget.spent }}</td>
+            <td>${{ selectedBudget.budgeted - selectedBudget.spent }}</td>
+          </tr>
+        </tfoot>
+      </table>
 				</div>
 				<div v-else=""><p class="title">now is creating budget</p></div>
 			</div>

@@ -20,15 +20,17 @@
         <th>budget</th>
         <th>花费</th>
         <th>收入</th>
+        <th>Balance</th>
         <th>编辑</th>
       </tr>
       <tbody>
         <tr v-for="budget,key in sortedBudgets">
-          <td>{{budget.month | moment('MMMM YYYY')}}</td>
-          <td>{{budget.budgeted}}</td>
-          <td>{{budget.spent}}</td>
-          <td>{{budget.income}}</td>
-          <td><router-link :to="{ name: 'updateBudget', params: { budgetId: budget.id } }">Edit</router-link></td>
+          <td class="">{{budget.month | moment('MMMM YYYY')}}</td>
+          <td class="">${{budget.budgeted}}</td>
+          <td class="">${{budget.spent}}</td>
+          <td class="">${{budget.income}}</td>
+          <td class="">${{ budget.budgeted - budget.spent}}</td>
+          <td class=""><router-link :to="{ name: 'updateBudget', params: { budgetId: budget.id } }"><button class="button is-primary">Edit</button></router-link></td>
         </tr>
       </tbody>
     </table>
