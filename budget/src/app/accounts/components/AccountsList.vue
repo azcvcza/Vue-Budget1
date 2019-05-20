@@ -13,7 +13,7 @@
 			</div>
 		</nav>
 
-		<div>
+		
 			<table class="table is-bordered is-striped is-hoverable is-fullwidth">
 				<tr>
 					<th>姓名</th>
@@ -42,7 +42,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		
 	</div>
 </template>
 
