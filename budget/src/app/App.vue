@@ -2,13 +2,14 @@
   <div id="app" class="tile is-ancestor" >
     <div class="tile is-parent">
       
-      <div class="tile is-child">
+      <div class="tile is-child is-4">
         <div class="tile is-child notification is-light">
           <p class="title">budgeterbium</p>
-        <span ><img src="../assets/logo.png"></span>
-        
+       <img src="../assets/logo.png">
+        <img src="../assets/logo.png">
         </div>
         <navigation class="tile is-child notification is-text"></navigation>
+        
       </div>
       <div class="tile is-child notification is-warning">
         <router-view></router-view>

@@ -77,17 +77,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					 <div
-            v-for="(value, key) in selectedBudget.budgetCategories"
-          >
-					{{value}}+{{key}}
-            <!--<component
+					<BudgetCategory
+						v-for="(value, key) in selectedBudget.budgetCategories"
+						:is="budgetCategoryComponent(value)"
+						:key="key"
+						:BudgetCategoryValue="value"
+						v-on:update-budget-category="saveBudgetCategory"
+						v-on:edit-budget-category="activeBudgetCategory = value"
+					></BudgetCategory>
+
+					<!--{{value}}+{{key}}+{{key.category}}-->
+
+					<!--<component
               :is="budgetCategoryComponent(value)"
               v-model="value"
               v-on:update-budget-category="saveBudgetCategory"
               v-on:edit-budget-category="activeBudgetCategory = value"
-            ></component>-->
-					</div>
+					></component>-->
+
 					<CreateUpdateBudgetCategory v-on:add-budget-category="addBudgetCategory"></CreateUpdateBudgetCategory>
 				</tbody>
 				<tfoot>
@@ -144,7 +151,7 @@
 					if (selectedBudget) {
 						this.editing = true;
 						this.selectedBudget = Object.assign({}, selectedBudget);
-						console.log("while mounting,selectedBudget:", this.selectedBudget);
+						//console.log("while mounting,selectedBudget:", this.selectedBudget);
 					}
 				});
 			}

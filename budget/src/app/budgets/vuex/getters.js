@@ -6,6 +6,7 @@ export default {
     },
 
     getCategoryById: (state, getters) => (categoryId) => {
+        console.log("in getters,state.categories:", state.categories, "\nid:", state.categories[categoryId])
         return state.categories && categoryId in state.categories ? state.categories[categoryId] : false;
     },
 
@@ -14,6 +15,7 @@ export default {
     },
 
     getBudgetCategoryById: (state, getters) => (budgetId, budgetCategoryId) => {
+
         return state.budgets && budgetId in state.budgets ?
             state.budgets[budgetId].budgetCategories && budgetCategoryId in state.budgets[budgetId].budgetCategories ?
             state.budgets[budgetId].budgetCategories[budgetCategoryId] :
