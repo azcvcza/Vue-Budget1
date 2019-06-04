@@ -14,6 +14,7 @@
 			<li>
 				<router-link :to="{ name: 'budgetsList' }">Budgets</router-link>
 			</li>
+			<li><router-link :to="{ name: 'transactionsList' }">Transactions</router-link></li>
 		</ul>
 	</div>
 </template>
