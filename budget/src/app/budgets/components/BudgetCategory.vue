@@ -17,8 +17,8 @@ export default {
   name: 'budget-item',
   props: ['BudgetCategoryValue'],
   mounted() {
-    console.log('in budgetcategory,get data :',this.props)
-    console.log('in budgetcategory,bcValue:',this.BudgetCategoryValue)
+    //console.log('in budgetcategory,get data :',this.props)
+    // console.log('in budgetcategory,bcValue:',this.BudgetCategoryValue)
   },
   computed: {
     ...mapGetters(['getCategoryById'])

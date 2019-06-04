@@ -220,10 +220,13 @@
 				});
 			},
 			budgetCategoryComponent(budgetCategory) {
-				return this.activeBudgetCategory &&
+				
+				  let returnValue = this.activeBudgetCategory &&
 					this.activeBudgetCategory === budgetCategory
 					? "create-update-budget-category"
 					: "budget-category";
+					console.log("in budgetCategoryComponent:",this.activeBudgetCategory,budgetCategory,returnValue);
+					return returnValue;
 			},
 			processDuplicateBudget(budgetId) {
 				if (
