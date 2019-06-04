@@ -10,7 +10,7 @@ const prepareTransaction = (getters, data) => {
     let budget = getters.getBudgetByDate(data.date);
     if (!budget) throw new Error('Could not find a budget for the date ' + data.date);
     data.budget = budget.id;
-    console.log(data.budget);
+    //console.log(data.budget);
 
     // tell the budget category that the transaction is occurring so it can update its amount
     let budgetCategory = getters.getBudgetCategoryByBudgetAndCategory(budget.id, data.category);

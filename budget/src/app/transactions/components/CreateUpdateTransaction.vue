@@ -1,5 +1,7 @@
 <template>
+  
   <tr class="transaction-create-update">
+   
     <td>
       <span class="subtitle is-5">
         <p class="control has-icon has-addons">
@@ -103,6 +105,7 @@ export default {
     this.loadCategories();
     this.loadAccounts();
     this.loadBusinesses();
+    
     if (this.value) {
       this.transaction = Object.assign({}, this.value);
       // we need the selected category, account, and business name and ID, but the object only holds their IDs by default

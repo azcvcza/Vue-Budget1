@@ -32,15 +32,15 @@
             v-on:edit-transaction="activeTransaction = transaction"
           ></component>
 				</template>-->
-				<Transition
+				<Transaction
 					v-for="(transaction, key) in sortedTransactions"
 					:class="{ 'is-delinquent': false }"
 					:is="transactionComponent(transaction)"
 					:key="key"
-					:TransactionVaule="transaction"
+					:TransactionValue="transaction"
 					v-on:updated-transaction="activeTransaction = null"
 					v-on:edit-transaction="activeTransaction = transaction"
-				></Transition>
+				></Transaction>
 				<CreateUpdateTransaction></CreateUpdateTransaction>
 			</tbody>
 		</table>

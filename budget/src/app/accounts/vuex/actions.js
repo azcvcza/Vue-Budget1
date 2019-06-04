@@ -28,3 +28,12 @@ export const loadAccounts = (store) => {
         });
     }
 };
+export const updateAccountBalance = ({ commit, getters }, data) => {
+    /*
+    Accepts a transaction amount and sums that with the current balance
+      account: account
+      amount: num
+     */
+    commit('UPDATE_ACCOUNT_BALANCE', data);
+    saveAccount(getters.getAccountById(data.account.id)); // save the updated account
+};

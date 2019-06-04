@@ -8,7 +8,9 @@ export default {
     UPDATE_ACCOUNT(state, payload) {
         state.accounts[payload.account.id] = payload.account;
     },
-
+    UPDATE_ACCOUNT_BALANCE(state, payload) {
+        state.accounts[payload.account.id].balance += parseFloat(payload.amount);
+    },
     DELETE_ACCOUNT(state, payload) {
         Vue.delete(state.accounts, payload.account.id);
     },
