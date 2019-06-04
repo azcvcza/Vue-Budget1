@@ -1,6 +1,7 @@
-import * as components from './components';
+    import * as components from './components';
 
-export default [{
-    path: '/transactions',
-    component: components.TransactionsListView
-}];
+    export default [{
+        path: '/transactions',
+        name: 'transactionsList',
+        component: components.TransactionsListView
+    }];
