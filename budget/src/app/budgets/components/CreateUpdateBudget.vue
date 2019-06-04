@@ -105,7 +105,7 @@
 								class="select"
 								@change="processDuplicateBudget($event.target.value)"
 							>
-								<option v-for="value, key in sortedBudgets" :value="value.id">{{ value.month | moment }}</option>
+								<option v-for="(value, key) in sortedBudgets" :value="value.id" :key="key">{{ value.month | moment }}</option>
 							</select>
 						</td>
 						<td>${{ selectedBudget.budgeted }}</td>
